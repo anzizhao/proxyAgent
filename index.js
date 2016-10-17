@@ -67,8 +67,8 @@ require('ssl-root-cas').inject()
 //});
 
 // HTTP/HTTPS proxy to connect to 
-var proxy = process.env.http_proxy || 'https://127.0.0.1:8087';
- console.log('using proxy server %j', proxy);
+//var proxy = process.env.http_proxy || 'https://127.0.0.1:8087';
+ //console.log('using proxy server %j', proxy);
   
  // HTTP endpoint for the proxy to connect to 
  //var endpoint = process.argv[2] || 'https://medium.com/_/api/tags/javascript/stream';
@@ -83,7 +83,8 @@ var opts = {
   ca: fs.readFileSync('client2-key.pem'),
   headers: {
       'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36',
-      'accept': 'text/html,application/xhtml+xml',
+      'accept': '*/*' ,
+
   }
 };
 
@@ -92,19 +93,46 @@ var opts = {
     //'accept': 'text/html,application/xhtml+xml',
 //}
  // create an instance of the `HttpProxyAgent` class with the proxy server information 
- var agent = new HttpsProxyAgent(proxy);
- opts.agent = agent;
-debugger;
- //https.get(opts, function (res) {
-     //console.log('"response" event!', res.headers);
- //});
+ //var agent = new HttpsProxyAgent(proxy);
+ //opts.agent = agent;
+ //
+ https.get(opts, function (res) {
+     console.log('"response" event!', res.headers);
+ });
 
-var req = https.request(opts, (res) => {
-    console.log('statusCode:', res.statusCode);
-    console.log('headers:', res.headers);
-    res.on('data', function(data) { 
-        process.stdout.write(data); 
-    }); 
-});
+//var req = https.request(opts, (res) => {
+    //console.log('statusCode:', res.statusCode);
+    //console.log('headers:', res.headers);
+    //res.on('data', function(data) { 
+        //process.stdout.write(data); 
+    //}); 
+//});
 
-req.end();
+//req.end();
+
+
+
+//var https = require('https');
+
+//var options = {
+  //host: 'openshift.redhat.com',
+  //port: 443,
+  //path: '/broker/rest/api',
+  //headers: {
+      //'accept': '*/*' ,
+  //},
+  //method: 'GET'
+//};
+
+//var req = https.request(options, function(res) {
+  //console.log(res.statusCode);
+  //res.on('data', function(d) {
+      //process.stdout.write(d);
+    //});
+//});
+//req.end();
+
+//req.on('error', function(e) {
+  //console.error(e);
+//});
+
